@@ -26,10 +26,14 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 
   saveButtons.on("click", function (){
-    // grab value from prev sibling (textarea)
-    var task = $(this).prev().val();
     
+    // save to local storage as array with time saved
+    var timeTask = {
+      task: $(this).prev().val(),
+      time: $(this).parent().attr("id")
+    };
+
     // test
-    console.log(task);
+    console.log(timeTask);
   })
 });
