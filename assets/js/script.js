@@ -20,6 +20,9 @@ $(function () {
     // grab today's date
     var today = dayjs();
     $('#currentDay').text(today.format('MMM D, YYYY h:mm a'));
+
+    // update view
+    updateCurrentTask();
   }, 1000);
 
   // grab currently saved in local storage
@@ -62,3 +65,29 @@ $(function () {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   })
 });
+
+function updateCurrentTask(){
+  var hour = dayjs().hour();
+
+  console.log(hour);
+  
+  $(".time-block").each(function(){
+    // replace current time setting
+    $(this).removeClass("past");
+    $(this).removeClass("present");
+    $(this).removeClass("future");
+
+    // present
+    if($(this).attr("id").slice(5, 7) === hour){
+      $(this).addClass("present");
+    }
+    // future
+    else if($(this).attr("id").slice(5, 7) >= hour){
+      $(this).addClass("future");
+    }
+    // past
+    else{
+      $(this).addClass("past");
+    }
+  });
+}
