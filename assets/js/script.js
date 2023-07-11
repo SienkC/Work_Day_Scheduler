@@ -28,24 +28,28 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
+
+  // grab currently saved in local storage
+  var allTasks = JSON.parse(localStorage.getItem("tasks"));
+
+  // update page to show saved tasks
+  if(allTasks !== null){
+    for(let i = 0; i < allTasks.length; i++){
+      $("#" + allTasks[i].time).children("textarea").text(allTasks[i].task);
+    }
+  }
+
   saveButtons.on("click", function (){
     // save to local storage as array with time saved
     var timeTask = {
       task: $(this).prev().val(),
       time: $(this).parent().attr("id")
     };
-
     var alreadyThere = false;
-
-    // test
-    console.log(timeTask);
 
     // check if time is already in array
     for(let i = 0; i < tasks.length; i++){
       if(tasks[i].time === timeTask.time){
-        // test
-        console.log(tasks[i].time + " matches " + timeTask.time);
-
         alreadyThere = true;
 
         // replace current task with new one
@@ -53,8 +57,8 @@ $(function () {
       }
     }
 
+    // Add new task to array of all tasks if time was not saved before
     if(!(alreadyThere)){
-      // Add new task to array of all tasks
       tasks.push(timeTask);
     }
 
@@ -62,6 +66,6 @@ $(function () {
     console.log(tasks);
 
     // save to local storage
-    localStorage.setItem("tasks", tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   })
 });
