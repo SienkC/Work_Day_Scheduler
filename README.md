@@ -19,7 +19,7 @@ To use the Work Day Scheduler page, load webpage and view the time. Type a task 
 The colors on each time block help show the task associated with the current time. The time in red is the current hour, the times in grey are the past hours, and the times in green are the future hours.
 
 
-Link to the webpage: [Work Day Scheduler]()
+Link to the webpage: [Work Day Scheduler](https://sienkc.github.io/Work_Day_Scheduler/)
 
 Screenshot with generated random password:
 ![Screenshot of Webpage with task added](./assets/images/screenshot.png)
