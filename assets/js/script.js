@@ -35,13 +35,25 @@ $(function () {
     }
   }
 
+  // test
+  console.log("start: ");
+  console.log(allTasks);
+
   saveButtons.on("click", function (){
     // save to local storage as array with time saved
     var timeTask = {
       task: $(this).prev().val(),
       time: $(this).parent().attr("id")
     };
+
     var alreadyThere = false;
+    var pastTasks = JSON.parse(localStorage.getItem("tasks"));
+
+    // save previous tasks, so they don't get overridden
+    if(JSON.parse(localStorage.getItem("tasks")) !== null){
+      tasks = tasks.concat(pastTasks);
+      
+    }
 
     // check if time is already in array
     for(let i = 0; i < tasks.length; i++){
@@ -58,18 +70,16 @@ $(function () {
       tasks.push(timeTask);
     }
 
-    // test
-    console.log(tasks);
-
     // save to local storage
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    // reset array, so it doesn't duplicate
+    tasks = [];
   })
 });
 
 function updateCurrentTask(){
   var hour = dayjs().hour();
-
-  console.log(hour);
   
   $(".time-block").each(function(){
     // replace current time setting
