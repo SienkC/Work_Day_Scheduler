@@ -4,6 +4,9 @@
 
 var saveButtons = $(".saveBtn");
 
+// empty array for saved tasks to be added
+var tasks = [];
+
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -26,14 +29,39 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
 
   saveButtons.on("click", function (){
-    
     // save to local storage as array with time saved
     var timeTask = {
       task: $(this).prev().val(),
       time: $(this).parent().attr("id")
     };
 
+    var alreadyThere = false;
+
     // test
     console.log(timeTask);
+
+    // check if time is already in array
+    for(let i = 0; i < tasks.length; i++){
+      if(tasks[i].time === timeTask.time){
+        // test
+        console.log(tasks[i].time + " matches " + timeTask.time);
+
+        alreadyThere = true;
+
+        // replace current task with new one
+        tasks.splice(i, 1, timeTask);
+      }
+    }
+
+    if(!(alreadyThere)){
+      // Add new task to array of all tasks
+      tasks.push(timeTask);
+    }
+
+    // test
+    console.log(tasks);
+
+    // save to local storage
+    localStorage.setItem("tasks", tasks);
   })
 });
