@@ -52,7 +52,7 @@ $(function () {
     // save previous tasks, so they don't get overridden
     if(JSON.parse(localStorage.getItem("tasks")) !== null){
       tasks = tasks.concat(pastTasks);
-      
+
     }
 
     // check if time is already in array
@@ -88,11 +88,11 @@ function updateCurrentTask(){
     $(this).removeClass("future");
 
     // present
-    if($(this).attr("id").slice(5, 7) === hour){
+    if($(this).attr("id").slice(5, 7) == hour){
       $(this).addClass("present");
     }
     // future
-    else if($(this).attr("id").slice(5, 7) >= hour){
+    else if($(this).attr("id").slice(5, 7) > hour){
       $(this).addClass("future");
     }
     // past
